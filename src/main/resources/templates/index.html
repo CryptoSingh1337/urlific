@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URLific</title>
+  <link rel="shortcut icon" th:href="@{/image/logo.png}" type="image/x-icon">
+  <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/tailwind.css}" />
+  <script th:src="@{/js/font-awesome.js}"></script>
+</head>
+
+<body>
+  <header id="header" class="rounded-b-2xl shadow-2xl bg-white">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+      <div class="flex lg:flex-1">
+        <a href="/" class="flex items-center font-bold text-2xl text-purple-700">
+          <span class="sr-only">URLific</span>
+          <img class="inline h-10 w-auto mr-2" th:src="@{/image/logo.png}" alt="logo" src="">
+          URLific
+        </a>
+      </div>
+      <div class="flex lg:hidden">
+        <button id="open-menu-btn" type="button"
+          class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
+          <span class="sr-only">Open main menu</span>
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+            aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+        </button>
+      </div>
+      <div class="hidden lg:flex lg:gap-x-12">
+        <a href="#about" class="text-lg font-semibold leading-6 text-gray-900">About</a>
+        <a href="#demo" class="text-lg font-semibold leading-6 text-gray-900">Demo</a>
+        <a href="#features" class="text-lg font-semibold leading-6 text-gray-900">Features</a>
+        <a href="#pricing" class="text-lg font-semibold leading-6 text-gray-900">Pricing</a>
+        <a href="/urlchecker" class="text-lg font-semibold leading-6 text-gray-900">URLific Checker</a>
+      </div>
+      <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+        <a th:href="@{index.html}"
+          class="leading-6 rounded-md bg-purple-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-purple-500 focus:ring-4 focus:ring-purple-300">Log
+          in <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </nav>
+    <!-- Mobile menu, show/hide based on menu open state. -->
+    <div class="lg:hidden" role="dialog" aria-modal="true">
+      <div id="mobile-menu"
+        class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+        <div class="flex items-center justify-between">
+          <a href="/" class="flex items-center font-bold text-2xl text-purple-700">
+            <span class="sr-only">URLific</span>
+            <img class="inline h-10 w-auto mr-2" th:src="@{/image/logo.png}" alt="logo" src="">
+            URLific
+          </a>
+          <button id="close-menu-btn" type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
+            <span class="sr-only">Close menu</span>
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+              aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="mt-6 flow-root">
+          <div class="-my-6 divide-y divide-gray-500/10">
+            <div class="space-y-2 py-6">
+              <a href="#about"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">About</a>
+              <a href="#demo"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Demo</a>
+              <a href="#features"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Features</a>
+              <a href="#pricing"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Pricing</a>
+              <a href="/urlchecker"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">URLific
+                Checker</a>
+            </div>
+            <div class="py-6">
+              <a href="#"
+                class="-mx-3 block rounded-lg bg-purple-600 px-3 py-2.5 text-base font-semibold leading-7 text-white hover:bg-purple-500">Log
+                in</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <section id="hero" class="mb-16 lg:mb-16">
+    <div
+      class="grid grid-cols-1 mx-auto px-5 py-16 lg:px-0 lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 lg:pl-16 overflow-hidden">
+      <div class="mr-auto place-self-center lg:col-span-7">
+        <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl">
+          Manage Your <span class="text-purple-500">Links</span>
+        </h1>
+        <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
+          Create your link for a handle, share the same link everywhere and change that on the portal without changing
+        </p>
+        <a th:href="@{register.html}"
+          class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-bold text-center text-white rounded-lg bg-purple-600 hover:bg-purple-500 focus:ring-4 focus:ring-purple-300">
+          Get started
+          <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+              clip-rule="evenodd"></path>
+          </svg>
+        </a>
+      </div>
+      <div class="mt-10 lg:mt-0 lg:col-span-5">
+        <img src="https://tailwindui.com/img/component-images/dark-project-app-screenshot.png" alt="Product screenshot"
+          class="w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0">
+      </div>
+    </div>
+    <svg id="wave" class="-mt-20 lg:-mt-40" style="transform:rotate(0deg); transition: 0.3s" viewBox="0 0 1440 300"
+         xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0">
+          <stop stop-color="rgba(183, 153, 255, 1)" offset="0%"></stop>
+          <stop stop-color="rgba(230, 255, 253, 1)" offset="100%"></stop>
+        </linearGradient>
+      </defs>
+      <path style="transform:translate(0, 0px); opacity:1" fill="url(#sw-gradient-0)"
+        d="M0,210L40,175C80,140,160,70,240,65C320,60,400,120,480,130C560,140,640,100,720,105C800,110,880,160,960,160C1040,160,1120,110,1200,105C1280,100,1360,140,1440,135C1520,130,1600,80,1680,80C1760,80,1840,130,1920,145C2000,160,2080,140,2160,115C2240,90,2320,60,2400,70C2480,80,2560,130,2640,150C2720,170,2800,160,2880,130C2960,100,3040,50,3120,45C3200,40,3280,80,3360,85C3440,90,3520,60,3600,40C3680,20,3760,10,3840,35C3920,60,4000,120,4080,140C4160,160,4240,140,4320,115C4400,90,4480,60,4560,65C4640,70,4720,110,4800,150C4880,190,4960,230,5040,230C5120,230,5200,190,5280,155C5360,120,5440,90,5520,100C5600,110,5680,160,5720,185L5760,210L5760,300L5720,300C5680,300,5600,300,5520,300C5440,300,5360,300,5280,300C5200,300,5120,300,5040,300C4960,300,4880,300,4800,300C4720,300,4640,300,4560,300C4480,300,4400,300,4320,300C4240,300,4160,300,4080,300C4000,300,3920,300,3840,300C3760,300,3680,300,3600,300C3520,300,3440,300,3360,300C3280,300,3200,300,3120,300C3040,300,2960,300,2880,300C2800,300,2720,300,2640,300C2560,300,2480,300,2400,300C2320,300,2240,300,2160,300C2080,300,2000,300,1920,300C1840,300,1760,300,1680,300C1600,300,1520,300,1440,300C1360,300,1280,300,1200,300C1120,300,1040,300,960,300C880,300,800,300,720,300C640,300,560,300,480,300C400,300,320,300,240,300C160,300,80,300,40,300L0,300Z">
+      </path>
+      <defs>
+        <linearGradient id="sw-gradient-1" x1="0" x2="0" y1="1" y2="0">
+          <stop stop-color="rgba(172, 188, 255, 1)" offset="0%"></stop>
+          <stop stop-color="rgba(230, 255, 253, 1)" offset="100%"></stop>
+        </linearGradient>
+      </defs>
+      <path style="transform:translate(0, 50px); opacity:0.9" fill="url(#sw-gradient-1)"
+        d="M0,30L40,55C80,80,160,130,240,140C320,150,400,120,480,120C560,120,640,150,720,135C800,120,880,60,960,70C1040,80,1120,160,1200,180C1280,200,1360,160,1440,150C1520,140,1600,160,1680,175C1760,190,1840,200,1920,195C2000,190,2080,170,2160,155C2240,140,2320,130,2400,110C2480,90,2560,60,2640,45C2720,30,2800,30,2880,25C2960,20,3040,10,3120,5C3200,0,3280,0,3360,40C3440,80,3520,160,3600,185C3680,210,3760,180,3840,185C3920,190,4000,230,4080,250C4160,270,4240,270,4320,225C4400,180,4480,90,4560,55C4640,20,4720,40,4800,55C4880,70,4960,80,5040,70C5120,60,5200,30,5280,50C5360,70,5440,140,5520,170C5600,200,5680,190,5720,185L5760,180L5760,300L5720,300C5680,300,5600,300,5520,300C5440,300,5360,300,5280,300C5200,300,5120,300,5040,300C4960,300,4880,300,4800,300C4720,300,4640,300,4560,300C4480,300,4400,300,4320,300C4240,300,4160,300,4080,300C4000,300,3920,300,3840,300C3760,300,3680,300,3600,300C3520,300,3440,300,3360,300C3280,300,3200,300,3120,300C3040,300,2960,300,2880,300C2800,300,2720,300,2640,300C2560,300,2480,300,2400,300C2320,300,2240,300,2160,300C2080,300,2000,300,1920,300C1840,300,1760,300,1680,300C1600,300,1520,300,1440,300C1360,300,1280,300,1200,300C1120,300,1040,300,960,300C880,300,800,300,720,300C640,300,560,300,480,300C400,300,320,300,240,300C160,300,80,300,40,300L0,300Z">
+      </path>
+      <defs>
+        <linearGradient id="sw-gradient-2" x1="0" x2="0" y1="1" y2="0">
+          <stop stop-color="rgba(174, 226, 255, 1)" offset="0%"></stop>
+          <stop stop-color="rgba(230, 255, 253, 1)" offset="100%"></stop>
+        </linearGradient>
+      </defs>
+      <path style="transform:translate(0, 100px); opacity:0.8" fill="url(#sw-gradient-2)"
+        d="M0,30L40,55C80,80,160,130,240,130C320,130,400,80,480,65C560,50,640,70,720,70C800,70,880,50,960,75C1040,100,1120,170,1200,200C1280,230,1360,220,1440,205C1520,190,1600,170,1680,155C1760,140,1840,130,1920,130C2000,130,2080,140,2160,150C2240,160,2320,170,2400,170C2480,170,2560,160,2640,160C2720,160,2800,170,2880,155C2960,140,3040,100,3120,70C3200,40,3280,20,3360,45C3440,70,3520,140,3600,150C3680,160,3760,110,3840,115C3920,120,4000,180,4080,180C4160,180,4240,120,4320,80C4400,40,4480,20,4560,45C4640,70,4720,140,4800,160C4880,180,4960,150,5040,120C5120,90,5200,60,5280,75C5360,90,5440,150,5520,165C5600,180,5680,150,5720,135L5760,120L5760,300L5720,300C5680,300,5600,300,5520,300C5440,300,5360,300,5280,300C5200,300,5120,300,5040,300C4960,300,4880,300,4800,300C4720,300,4640,300,4560,300C4480,300,4400,300,4320,300C4240,300,4160,300,4080,300C4000,300,3920,300,3840,300C3760,300,3680,300,3600,300C3520,300,3440,300,3360,300C3280,300,3200,300,3120,300C3040,300,2960,300,2880,300C2800,300,2720,300,2640,300C2560,300,2480,300,2400,300C2320,300,2240,300,2160,300C2080,300,2000,300,1920,300C1840,300,1760,300,1680,300C1600,300,1520,300,1440,300C1360,300,1280,300,1200,300C1120,300,1040,300,960,300C880,300,800,300,720,300C640,300,560,300,480,300C400,300,320,300,240,300C160,300,80,300,40,300L0,300Z">
+      </path>
+    </svg>
+  </section>
+  <section id="about" class="px-5 my-16 lg:my-16 lg:px-0">
+    <div class="max-w-screen-xl mx-auto">
+      <h1 class="text-3xl text-purple-700 font-bold text-center mb-10">About</h1>
+      <div class="mx-auto max-w-2xl text-justify">
+        <p class="mt-6 text-lg leading-8 text-gray-600">
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+          standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+          make a type specimen book. It has survived not only five centuries, but also the leap into electronic
+          typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
+          sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
+          PageMaker including versions of Lorem Ipsum.
+        </p>
+      </div>
+    </div>
+  </section>
+  <section id="demo" class="px-5 my-16 lg:my-16 lg:px-0">
+    <div class="max-w-screen-xl mx-auto">
+      <h1 class="text-3xl text-purple-700 font-bold text-center mb-10">Demo</h1>
+      <div class="mx-auto max-w-2xl lg:text-center">
+        <p class="mt-6 text-lg leading-8 text-gray-600">
+          Quis tellus eget adipiscing convallis sit sit eget aliquet quis. Suspendisse eget egestas a elementum pulvinar
+          et feugiat blandit at. In mi viverra elit nunc.
+        </p>
+        <iframe class="mx-auto my-10 aspect-video w-full" src="https://www.youtube-nocookie.com/embed/LiovUkBWOos"
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+  <section id="features" class="px-5 my-16 lg:my-16 lg:px-0">
+    <div class="max-w-screen-xl mx-auto">
+      <h1 class="text-3xl text-purple-700 font-bold text-center mb-10">Features</h1>
+      <div>
+        <div class="mx-auto">
+          <div class="mx-auto max-w-2xl lg:text-center">
+            <p class="mt-6 text-lg leading-8 text-gray-600">
+              Quis tellus eget adipiscing convallis sit sit eget aliquet quis. Suspendisse eget egestas a elementum
+              pulvinar et feugiat blandit at. In mi viverra elit nunc.</p>
+          </div>
+          <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:max-w-4xl">
+            <dl class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
+              <div class="relative pl-16">
+                <dt class="text-base font-semibold leading-7 text-gray-900">
+                  <div
+                    class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-purple-600">
+                    <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                      stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+                    </svg>
+                  </div>
+                  Push to deploy
+                </dt>
+                <dd class="mt-2 text-base leading-7 text-gray-600">Morbi viverra dui mi arcu sed. Tellus semper
+                  adipiscing suspendisse semper morbi. Odio urna massa nunc massa.</dd>
+              </div>
+              <div class="relative pl-16">
+                <dt class="text-base font-semibold leading-7 text-gray-900">
+                  <div
+                    class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-purple-600">
+                    <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                      stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                    </svg>
+                  </div>
+                  SSL certificates
+                </dt>
+                <dd class="mt-2 text-base leading-7 text-gray-600">Sit quis amet rutrum tellus ullamcorper ultricies
+                  libero dolor eget. Sem sodales gravida quam turpis enim lacus amet.</dd>
+              </div>
+              <div class="relative pl-16">
+                <dt class="text-base font-semibold leading-7 text-gray-900">
+                  <div
+                    class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-purple-600">
+                    <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                      stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+                    </svg>
+                  </div>
+                  Simple queues
+                </dt>
+                <dd class="mt-2 text-base leading-7 text-gray-600">Quisque est vel vulputate cursus. Risus proin diam
+                  nunc commodo. Lobortis auctor congue commodo diam neque.</dd>
+              </div>
+              <div class="relative pl-16">
+                <dt class="text-base font-semibold leading-7 text-gray-900">
+                  <div
+                    class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-purple-600">
+                    <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                      stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M7.864 4.243A7.5 7.5 0 0119.5 10.5c0 2.92-.556 5.709-1.568 8.268M5.742 6.364A7.465 7.465 0 004.5 10.5a7.464 7.464 0 01-1.15 3.993m1.989 3.559A11.209 11.209 0 008.25 10.5a3.75 3.75 0 117.5 0c0 .527-.021 1.049-.064 1.565M12 10.5a14.94 14.94 0 01-3.6 9.75m6.633-4.596a18.666 18.666 0 01-2.485 5.33" />
+                    </svg>
+                  </div>
+                  Advanced security
+                </dt>
+                <dd class="mt-2 text-base leading-7 text-gray-600">Arcu egestas dolor vel iaculis in ipsum mauris.
+                  Tincidunt mattis aliquet hac quis. Id hac maecenas ac donec pharetra eget.</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="pricing" class="px-5 my-16 lg:my-16 lg:px-0">
+    <div class="max-w-screen-xl mx-auto">
+      <h1 class="text-3xl text-purple-700 font-bold text-center mb-10">Pricing</h1>
+      <div>
+        <div class="mx-auto max-w-2xl lg:text-center">
+          <p class="mt-6 text-lg leading-8 text-gray-600">Choose a plan that works best for you</p>
+        </div>
+        <div class="mx-auto p-4 sm:p-10 lg:py-20">
+          <div class="flex flex-col lg:flex-row justify-center items-center  gap-8 lg:gap-0 lg:mt-4">
+            <div class="flex-1 w-full mb-6 bg-white rounded-xl shadow-xl border-2 border-gray-400 lg:scale-95">
+              <div class="text-center p-12">
+                <p class="text-3xl lg:text-2xl xl:text-3xl pb-4">Hobby</p>
+                <div class="flex justify justify-center items-center">
+                  <span class="font-extrabold text-5xl lg:text-4xl xl:text-6xl align-text-middle px-3">$ 79</span>
+                  <span class="font-normal text-xl text-gray-500 inline-block align-text-middle">/month</span>
+                </div>
+              </div>
+              <div class="bg-gray-100 rounded-b-xl border-t-2 border-gray-200/20 p-10">
+                <ul class="space-y-4">
+                  <li class="flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-green-500" fill="none"
+                      viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-500">when an unknown printer took a galley.</span>
+                  </li>
+                  <li class="flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-green-500" fill="none"
+                      viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-500">leap into electronic typesetting remaining. </span>
+                  </li>
+                  <li class="flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-green-500" fill="none"
+                      viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-500">ontaining Lorem Ipsum passages and more.</span>
+                  </li>
+                </ul>
+                <button type="button"
+                  class="w-full text-center bg-white text-lg text-purple-600 mt-8 p-3 rounded shadow-xl transition hover:text-white hover:bg-purple-600">Start
+                  your trial</button>
+              </div>
+            </div>
+            <div
+              class="lg:max-w-max mb-6 relative w-full bg-white rounded-xl shadow-xl border-2 border-purple-600 lg:scale-110 z-10">
+              <div class="text-center p-12">
+                <p class="text-3xl lg:text-2xl xl:text-3xl pb-4 font-semibold">Growth</p>
+                <div class="flex justify justify-center items-center">
+                  <span class="font-extrabold text-5xl lg:text-4xl xl:text-6xl align-text-middle px-3">$ 149</span>
+                  <span class="font-normal text-xl text-gray-500 inline-block align-text-middle">/month</span>
+                </div>
+              </div>
+              <div class="bg-gray-100 rounded-b-xl border-t-2 border-gray-200/20 p-10">
+                <ul class="space-y-4">
+                  <li class="flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-green-500" fill="none"
+                      viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-500">when an unknown printer took a galley.</span>
+                  </li>
+                  <li class="flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-green-500" fill="none"
+                      viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-500">leap into electronic typesetting remaining. </span>
+                  </li>
+                  <li class="flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-green-500" fill="none"
+                      viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-500">ontaining Lorem Ipsum passages and more.</span>
+                  </li>
+                  <li class="flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-green-500" fill="none"
+                      viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-500">leap into electronic typesetting remaining. </span>
+                  </li>
+                  <li class="flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-green-500" fill="none"
+                      viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-500">ontaining Lorem Ipsum passages and more.</span>
+                  </li>
+                </ul>
+                <button type="button"
+                  class="w-full text-center bg-purple-600 text-lg text-white mt-8 p-3 rounded shadow-xl transition hover:text-white hover:bg-purple-700">Start
+                  your trial</button>
+              </div>
+              <div
+                class="absolute rounded-full w-40 bg-purple-600 text-white text-center text-sm tracking-wider px-4 py-1 -top-3 inset-x-0 mx-auto">
+                MOST POPULAR</div>
+            </div>
+            <div class="flex-1 w-full mb-6 bg-white rounded-xl shadow-xl border-2 border-gray-400 lg:scale-95">
+              <div class="text-center p-12">
+                <p class="text-3xl lg:text-2xl xl:text-3xl pb-4">Hobby</p>
+                <div class="flex justify justify-center items-center">
+                  <span class="font-extrabold text-5xl lg:text-4xl xl:text-6xl align-text-middle px-3">$ 349</span>
+                  <span class="font-normal text-xl text-gray-500 inline-block align-text-middle">/month</span>
+                </div>
+              </div>
+              <div class="bg-gray-100 rounded-b-xl border-t-2 border-gray-200/20 p-10">
+                <ul class="space-y-4">
+                  <li class="flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-green-500" fill="none"
+                      viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-500">when an unknown printer took a galley.</span>
+                  </li>
+                  <li class="flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-green-500" fill="none"
+                      viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-500">leap into electronic typesetting remaining. </span>
+                  </li>
+                  <li class="flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-green-500" fill="none"
+                      viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-500">ontaining Lorem Ipsum passages and more.</span>
+                  </li>
+                </ul>
+                <button type="button"
+                  class="w-full text-center bg-white text-lg text-purple-600 mt-8 p-3 rounded shadow-xl transition hover:text-white hover:bg-purple-600">Start
+                  your trial</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <button id="btn-back-to-top" type="button" data-mdb-ripple="true" data-mdb-ripple-color="light"
+    class="inline-block z-20 p-3 bg-purple-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-purple-500 hover:shadow-lg focus:bg-purple-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-700 active:shadow-lg transition duration-300 ease-in-out bottom-5 right-5">
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" class="w-4 h-4" role="img"
+      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+      <path fill="currentColor"
+        d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z">
+      </path>
+    </svg>
+  </button>
+  <footer id="footer" class="footer-1 bg-gray-50 pt-6">
+    <div class="container mx-auto text-center lg:text-start">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 px-4 md:py-4 justify-center">
+        <div class="lg:text-center">
+          <h3 class="text-3xl font-bold text-purple-700 mb-6">URLific</h3>
+          <img class="w-2/6 lg:w-1/2 mx-auto" th:src="@{/image/logo.png}" alt="logo" src="">
+        </div>
+        <div class="px-4">
+          <h5 class="text-xl font-bold mb-6">Links</h5>
+          <ul class="list-none footer-links">
+            <li class="mb-2">
+              <a href="#"
+                class="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800">
+                FAQ</a>
+            </li>
+            <li class="mb-2">
+              <a href="#"
+                class="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800">
+                Help
+              </a>
+            </li>
+            <li class="mb-2">
+              <a href="#"
+                class="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800">
+                Support
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="px-4">
+          <h5 class="text-xl font-bold mb-6">Legal</h5>
+          <ul class="list-none footer-links">
+            <li class="mb-2">
+              <a href="#"
+                class="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800">
+                Terms
+              </a>
+            </li>
+            <li class="mb-2">
+              <a href="#"
+                class="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800">
+                Privacy
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="px-4">
+          <h5 class="text-xl font-bold mb-6">Social</h5>
+          <ul class="list-none footer-links">
+            <li class="mb-2">
+              <a href="#"
+                class="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800">
+                <i class="fa-brands fa-linkedin-in"></i> LinkedIn
+              </a>
+            </li>
+            <li class="mb-2">
+              <a href="#"
+                class="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800">
+                <i class="fa-brands fa-twitter"></i> Twitter
+              </a>
+            </li>
+            <li class="mb-2">
+              <a href="#"
+                class="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800">
+                <i class="fa-brands fa-github"></i> GitHub
+              </a>
+            </li>
+            <li class="mb-2">
+              <a href="#"
+                class="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800">
+                <i class="fa-brands fa-discord"></i> Discord
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <p class="text-center bg-stone-100 text-gray-700 py-3">
+        Made with <span class="text-rose-600">❤</span>
+      </p>
+    </div>
+  </footer>
+  <script th:src="@{/js/script.js}"></script>
+</body>
+
+</html>

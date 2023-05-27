@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;900&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.display-none {
+  display: none;
+}
+
+#mobile-menu {
+  z-index: 999;
+}
+
+#btn-back-to-top {
+  position: fixed;
+  display: none;
+}
+
+.footer-links a {
+  padding-bottom: 2px;
+}
+
+footer h5 {
+  color: #4b5563
+}
+
+footer ul li a {
+  color: #374151;
+}
