@@ -1,30 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - URLific</title>
-  <link rel="shortcut icon" th:href="/image/logo.png" href="image/logo.png" type="image/x-icon">
-  <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/tailwind.css}" href="css/tailwind.css" />
-  <script src="https://kit.fontawesome.com/8dd2da3a5f.js" crossorigin="anonymous"></script>
+  <link rel="shortcut icon" th:href="@{/image/logo.png}" type="image/x-icon">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/tailwind.css}" />
+  <script th:src="@{/js/font-awesome.js}"></script>
 </head>
 
 <body>
   <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-      <img class="mx-auto h-10 w-auto" src="image/logo.png" alt="logo">
+      <a th:href="@{/}">
+        <img class="mx-auto h-10 w-auto" th:src="@{image/logo.png}" src="" alt="logo">
+      </a>
       <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your
         account</h2>
     </div>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm p-6 rounded-md shadow-md">
-      <form class="space-y-6" action="#" method="POST">
+      <div th:if="${param.error}" class="p-3 bg-rose-200 rounded-md text-red-700">
+        <p><i class="fa-sharp fa-solid fa-circle-xmark"></i> Invalid username/password!</p>
+      </div>
+      <div th:if="${param.logout}" class="p-3 bg-green-200 rounded-md text-green-700">
+        <p><i class="fa-sharp fa-solid fa-circle-check"></i> You have successfully logged out!</p>
+      </div>
+      <form class="space-y-6" th:action="@{/authenticateTheUser}" method="POST">
         <div>
-          <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+          <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Username</label>
           <div class="mt-2">
-            <input id="email" name="email" type="email" autocomplete="email" required
+            <input id="username" name="username" type="text" autocomplete="username" required
               class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6">
           </div>
         </div>
@@ -32,7 +40,7 @@
           <div class="flex items-center justify-between">
             <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
             <div class="text-sm">
-              <a href="/reset.html" class="text-indigo-500">Forgot password?</a>
+              <a th:href="@{/reset}" class="text-indigo-500">Forgot password?</a>
             </div>
           </div>
           <div class="mt-2">
@@ -48,7 +56,7 @@
         </div>
         <p class="text-end text-sm">
           <span class="text-gray-400">No account? </span>
-          <a href="/register.html" class="text-indigo-500">Register</a>
+          <a th:href="@{/register}" class="text-indigo-500">Register</a>
         </p>
       </form>
       <div
@@ -58,13 +66,13 @@
         </p>
       </div>
       <div class="grid grid-cols-1">
-        <a class="mb-3 flex w-full items-center justify-center rounded bg-red-500 px-7 py-1.5 text-center text-sm font-semibold leading-6 text-white transition duration-150 ease-in-out hover:bg-red-600 focus:bg-red-600 focus:outline-none focus:ring-0"
+        <a class="mb-3 flex w-full items-center justify-center rounded-md bg-red-500 px-7 py-1.5 text-center text-sm font-semibold leading-6 text-white transition duration-150 ease-in-out hover:bg-red-600 focus:bg-red-600 focus:outline-none focus:ring-0"
           href="https://google.com" role="button" data-te-ripple-init data-te-ripple-color="light">
           <i class="fa-brands fa-google mr-2"></i>
           Google
         </a>
-        <a class="mb-3 flex w-full items-center justify-center rounded bg-gray-800 px-7 py-1.5 text-center text-sm font-semibold leading-6 text-white transition duration-150 ease-in-out hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:ring-0"
-          href="#!" role="button" data-te-ripple-init data-te-ripple-color="light">
+        <a class="mb-3 flex w-full items-center justify-center rounded-md bg-gray-800 px-7 py-1.5 text-center text-sm font-semibold leading-6 text-white transition duration-150 ease-in-out hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:ring-0"
+          href="https://github.com" role="button" data-te-ripple-init data-te-ripple-color="light">
           <i class="fa-brands fa-github mr-2"></i>
           GitHub
         </a>

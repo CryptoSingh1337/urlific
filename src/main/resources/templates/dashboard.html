@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - URLific</title>
+  <link rel="shortcut icon" th:href="@{/image/logo.png}" type="image/x-icon">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/tailwind.css}"/>
+  <script th:src="@{/js/font-awesome.js}"></script>
+</head>
+
+<body>
+  <p>
+    User: <span sec:authentication="principal.username"></span><br><br>
+    Role(s): <span sec:authentication="principal.authorities"></span>
+  </p>
+  <br>
+  <div sec:authorize="hasRole('ADMIN')">
+    <a th:href="@{/admin/dashboard}">Admin dashboard</a>
+  </div>
+  <form th:action="@{/logout}" method="post">
+    <button class="bg-rose-400" type="submit">Logout</button>
+  </form>
+</body>
+
+</html>

@@ -9,5 +9,4 @@ public class UrlificApplication {
     public static void main(String[] args) {
         SpringApplication.run(UrlificApplication.class, args);
     }
-
 }

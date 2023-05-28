@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - URLific</title>
+  <link rel="shortcut icon" th:href="@{/image/logo.png}" type="image/x-icon">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/tailwind.css}"/>
+  <script th:src="@{/js/font-awesome.js}"></script>
+</head>
+
+<body>
+<h2>Admin Dashboard</h2>
+<form th:action="@{/logout}" method="post">
+  <button class="bg-rose-400" type="submit">Logout</button>
+</form>
+</body>
+
+</html>

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -7,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>URLific</title>
   <link rel="shortcut icon" th:href="@{/image/logo.png}" type="image/x-icon">
-  <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/tailwind.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/tailwind.css}" />
   <script th:src="@{/js/font-awesome.js}"></script>
 </head>
 
@@ -39,7 +38,7 @@
         <a href="/urlchecker" class="text-lg font-semibold leading-6 text-gray-900">URLific Checker</a>
       </div>
       <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-        <a th:href="@{index.html}"
+        <a th:href="@{/login}"
           class="leading-6 rounded-md bg-purple-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-purple-500 focus:ring-4 focus:ring-purple-300">Log
           in <span aria-hidden="true">&rarr;</span></a>
       </div>
