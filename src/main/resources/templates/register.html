@@ -6,33 +6,58 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register - URLific</title>
-  <link rel="shortcut icon" th:href="/image/logo.png" href="image/logo.png" type="image/x-icon">
-  <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/tailwind.css}" href="css/tailwind.css" />
-  <script src="https://kit.fontawesome.com/8dd2da3a5f.js" crossorigin="anonymous"></script>
+  <link rel="shortcut icon" th:href="@{/image/logo.png}" href="/image/logo.png" type="image/x-icon">
+  <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/tailwind.css}" href="/css/tailwind.css" />
+  <script th:src="@{/js/font-awesome.js}" crossorigin="anonymous"></script>
 </head>
 
 <body>
   <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-      <img class="mx-auto h-10 w-auto" src="image/logo.png" alt="logo">
+      <a th:href="@{/}">
+        <img class="mx-auto h-10 w-auto" th:src="@{image/logo.png}" src="" alt="logo">
+      </a>
       <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Create your account</h2>
     </div>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm p-6 rounded-md shadow-md">
-      <form class="space-y-8" action="#" method="POST">
-        <div class="relative">
-          <input id="email" name="email" type="text"
-            class="peer w-full p-2 rounded-md border-2 border-gray-300 placeholder-transparent focus:ring-0 focus:border-purple-600"
-            placeholder="abc@xyz.com">
-          <label for="email"
-            class="absolute pl-2 left-0 -top-5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:pl-0 peer-focus:-top-5 peer-focus:text-purple-600 peer-focus:text-sm">Email</label>
+      <form class="space-y-8" th:action="@{/register}" th:object="${user}" method="POST">
+        <div class="grid grid-cols-2 gap-4">
+          <div class="relative">
+            <input id="firstName" name="firstName" type="text" th:field="*{firstName}"
+                   class="peer w-full p-2 rounded-md border-2 border-gray-300 placeholder-transparent focus:ring-0 focus:border-purple-600"
+                   placeholder="First Name">
+            <label for="firstName"
+                   class="absolute pl-2 left-0 -top-5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:pl-0 peer-focus:-top-5 peer-focus:text-purple-600 peer-focus:text-sm">First Name</label>
+          </div>
+          <div class="relative">
+            <input id="lastName" name="lastName" type="text" th:field="*{lastName}"
+                   class="peer w-full p-2 rounded-md border-2 border-gray-300 placeholder-transparent focus:ring-0 focus:border-purple-600"
+                   placeholder="Last Name">
+            <label for="lastName"
+                   class="absolute pl-2 left-0 -top-5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:pl-0 peer-focus:-top-5 peer-focus:text-purple-600 peer-focus:text-sm">Last Name</label>
+          </div>
         </div>
         <div class="relative">
-          <input id="password" name="password" type="password"
+          <input id="username" name="username" type="text" th:field="*{username}"
+                 class="peer w-full p-2 rounded-md border-2 border-gray-300 placeholder-transparent focus:ring-0 focus:border-purple-600"
+                 placeholder="Username">
+          <label for="username"
+                 class="absolute pl-2 left-0 -top-5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:pl-0 peer-focus:-top-5 peer-focus:text-purple-600 peer-focus:text-sm">Username</label>
+        </div>
+        <div class="relative">
+          <input id="password" name="password" type="password" th:field="*{password}"
             class="peer w-full p-2 rounded-md border-2 border-gray-300 placeholder-transparent focus:ring-0 focus:border-purple-600"
             placeholder="password">
           <label for="password"
             class="absolute pl-2 left-0 -top-5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:pl-0 peer-focus:-top-5 peer-focus:text-purple-600 peer-focus:text-sm">Password</label>
+        </div>
+        <div class="relative">
+          <input id="email" name="email" type="email" th:field="*{email}"
+                 class="peer w-full p-2 rounded-md border-2 border-gray-300 placeholder-transparent focus:ring-0 focus:border-purple-600"
+                 placeholder="Email">
+          <label for="email"
+                 class="absolute pl-2 left-0 -top-5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:pl-0 peer-focus:-top-5 peer-focus:text-purple-600 peer-focus:text-sm">Email</label>
         </div>
         <div>
           <button type="submit"
@@ -41,7 +66,7 @@
         </div>
         <p class="text-end text-sm">
           <span class="text-gray-400">Already have an account? </span>
-          <a href="/register.html" class="text-indigo-500">Sign in</a>
+          <a th:href="@{/login}" class="text-indigo-500">Sign in</a>
         </p>
       </form>
       <div
@@ -57,7 +82,7 @@
           Google
         </a>
         <a class="mb-3 flex w-full items-center justify-center rounded bg-gray-800 px-7 py-1.5 text-center text-sm font-semibold leading-6 text-white transition duration-150 ease-in-out hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:ring-0"
-          href="#!" role="button" data-te-ripple-init data-te-ripple-color="light">
+          href="https://github.com" role="button" data-te-ripple-init data-te-ripple-color="light">
           <i class="fa-brands fa-github mr-2"></i>
           GitHub
         </a>

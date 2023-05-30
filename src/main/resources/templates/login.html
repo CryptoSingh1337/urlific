@@ -23,10 +23,13 @@
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm p-6 rounded-md shadow-md">
       <div th:if="${param.error}" class="p-3 bg-rose-200 rounded-md text-red-700">
-        <p><i class="fa-sharp fa-solid fa-circle-xmark"></i> Invalid username/password!</p>
+        <p><i class="fa-sharp fa-solid fa-circle-xmark"></i> Invalid username and password!</p>
       </div>
       <div th:if="${param.logout}" class="p-3 bg-green-200 rounded-md text-green-700">
-        <p><i class="fa-sharp fa-solid fa-circle-check"></i> You have successfully logged out!</p>
+        <p><i class="fa-sharp fa-solid fa-circle-check"></i> You have been logged out!</p>
+      </div>
+      <div th:if="${param.successful}" class="p-3 bg-green-200 rounded-md text-green-700">
+        <p><i class="fa-sharp fa-solid fa-circle-check"></i> Your account has been created! Please verify your email.</p>
       </div>
       <form class="space-y-6" th:action="@{/authenticateTheUser}" method="POST">
         <div>

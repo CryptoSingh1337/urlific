@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/admin/dashboard")
-public class AdminDashboardController {
+public record AdminDashboardController() {
 
     @GetMapping
     public String adminDashboardPage() {
