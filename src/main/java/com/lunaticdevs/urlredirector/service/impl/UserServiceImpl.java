@@ -1,6 +1,7 @@
 package com.lunaticdevs.urlredirector.service.impl;
 
 import com.lunaticdevs.urlredirector.dto.UserDTO;
+import com.lunaticdevs.urlredirector.entity.Role;
 import com.lunaticdevs.urlredirector.entity.User;
 import com.lunaticdevs.urlredirector.exception.UserNotFoundException;
 import com.lunaticdevs.urlredirector.mapper.UserMapper;
@@ -13,6 +14,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * author: Saransh Kumar
@@ -41,6 +44,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         User user = userMapper.userDtoToUser(userDTO);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setProfileImage(String.format("https://avatars.dicebear.com/api/bottts/%s.svg", user.getUsername()));
+        user.setIsAccountVerified(true);
+        user.setAuthorities(List.of(Role.USER));
         userRepository.save(user);
     }
 

@@ -30,6 +30,6 @@ public record RegisterController(UserService userService) {
     public String registerUser(@Valid @ModelAttribute UserDTO userDTO) {
         log.debug("Registering user with username: {}", userDTO.getUsername());
         userService.save(userDTO);
-        return "redirect:/login?successful=true";
+        return "redirect:/login";
     }
 }
