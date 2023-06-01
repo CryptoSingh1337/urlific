@@ -19,7 +19,6 @@ public class UserMapperImpl implements UserMapper {
                 .email(userDTO.getEmail())
                 .username(userDTO.getUsername())
                 .password(userDTO.getPassword())
-                .profileImage(userDTO.getProfileImage())
                 .build();
     }
 }

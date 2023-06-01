@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Access Denied - URLific</title>
+  <link rel="shortcut icon" th:href="@{/image/logo.png}" type="image/x-icon">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/tailwind.css}"/>
+</head>
+
+<body>
+<section class="flex items-center h-full p-16">
+  <div class="container flex flex-col items-center justify-center px-5 mx-auto my-8">
+    <div class="max-w-md text-center">
+      <h2 class="mb-8 font-extrabold text-9xl text-gray-600">
+        <span class="sr-only">Internal Server Error</span>5<i class="text-purple-500">0</i>0
+      </h2>
+      <p class="text-2xl font-semibold md:text-3xl">Internal Server Error</p>
+      <p class="mt-4 mb-8">But dont worry, you can find plenty of other things on our homepage.</p>
+      <a rel="noopener noreferrer" th:if="${!#authentication.authenticated}" th:href="@{/}"
+         class="px-8 py-3 font-semibold rounded-md bg-purple-500 text-white">Home page</a>
+      <a rel="noopener noreferrer" th:if="${#authentication.authenticated}" th:href="@{/dashboard}"
+         class="px-8 py-3 font-semibold rounded-md bg-purple-500 text-white">Back to dashboard</a>
+    </div>
+  </div>
+</section>
+</body>
+
+</html>

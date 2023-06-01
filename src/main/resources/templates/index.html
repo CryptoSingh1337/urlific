@@ -7,7 +7,7 @@
   <title>URLific</title>
   <link rel="shortcut icon" th:href="@{/image/logo.png}" type="image/x-icon">
   <link rel="stylesheet" type="text/css" th:href="@{/css/tailwind.css}" />
-  <script th:src="@{/js/font-awesome.js}"></script>
+  <script th:src="@{/js/font-awesome.min.js}"></script>
 </head>
 
 <body>
@@ -39,7 +39,7 @@
       </div>
       <div class="hidden lg:flex lg:flex-1 lg:justify-end">
         <a th:href="@{/login}"
-          class="leading-6 rounded-md bg-purple-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-purple-500 focus:ring-4 focus:ring-purple-300">Log
+          class="leading-6 rounded-md bg-purple-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-purple-500">Log
           in <span aria-hidden="true">&rarr;</span></a>
       </div>
     </nav>
@@ -97,7 +97,7 @@
           Create your link for a handle, share the same link everywhere and change that on the portal without changing
         </p>
         <a th:href="@{/register}"
-          class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-bold text-center text-white rounded-lg bg-purple-600 hover:bg-purple-500 focus:ring-4 focus:ring-purple-300">
+          class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-bold text-center text-white rounded-lg bg-purple-600 hover:bg-purple-500">
           Get started
           <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd"
@@ -483,7 +483,7 @@
       </p>
     </div>
   </footer>
-  <script th:src="@{/js/script.js}"></script>
+  <script th:src="@{/js/index.js}"></script>
 </body>
 
 </html>

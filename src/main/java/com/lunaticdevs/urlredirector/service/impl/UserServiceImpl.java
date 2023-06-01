@@ -9,7 +9,6 @@ import com.lunaticdevs.urlredirector.repository.UserRepository;
 import com.lunaticdevs.urlredirector.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,12 +29,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public User loadUserByUsername(String username) throws UsernameNotFoundException {
         log.debug("Retrieving user with username: {}", username);
-        User user = findByUsernameHelper(username);
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
-                user.getIsAccountVerified(), true, true, true,
-                user.getAuthorities());
+        return findByUsernameHelper(username);
+    }
+
+    @Override
+    public User getUserByUsername(String username) {
+        return findByUsernameHelper(username);
     }
 
     @Override
@@ -44,7 +45,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         User user = userMapper.userDtoToUser(userDTO);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setProfileImage(String.format("https://avatars.dicebear.com/api/bottts/%s.svg", user.getUsername()));
-        user.setIsAccountVerified(true);
+        user.setIsAccountVerified(false);
         user.setAuthorities(List.of(Role.USER));
         userRepository.save(user);
     }

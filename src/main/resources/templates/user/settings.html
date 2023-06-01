@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - URLific</title>
+  <link rel="shortcut icon" th:href="@{/image/logo.png}" type="image/x-icon">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/tailwind.css}"/>
+  <script th:src="@{/js/font-awesome.min.js}"></script>
+  <script th:src="@{/js/flowbite.min.js}"></script>
+</head>
+
+<body>
+<div th:replace="~{fragements/layout.html :: header}"></div>
+<div th:replace="~{fragements/layout.html :: sidebar}"></div>
+<div class="p-4 sm:ml-64">
+  <div class="mt-14 lg:p-4">
+    <div class="flex items-center justify-between">
+      <h1 class="font-medium text-lg">Settings</h1>
+    </div>
+  </div>
+</div>
+<script th:src="@{/js/dashboard.js}"></script>
+</body>
+
+</html>

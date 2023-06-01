@@ -8,7 +8,7 @@
   <title>Register - URLific</title>
   <link rel="shortcut icon" th:href="@{/image/logo.png}" href="/image/logo.png" type="image/x-icon">
   <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/tailwind.css}" href="/css/tailwind.css" />
-  <script th:src="@{/js/font-awesome.js}" crossorigin="anonymous"></script>
+  <script th:src="@{/js/font-awesome.min.js}" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -21,18 +21,23 @@
     </div>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm p-6 rounded-md shadow-md">
+      <div th:if="${#fields.hasErrors()}" class="p-3 bg-rose-200 rounded-md text-red-700">
+        <ul class="list-disc ml-8">
+          <li th:each="err : ${#fields.errors('user.*')}" th:text="${err}"></li>
+        </ul>
+      </div>
       <form class="space-y-8" th:action="@{/register}" th:object="${user}" method="POST">
         <div class="grid grid-cols-2 gap-4">
           <div class="relative">
             <input id="firstName" name="firstName" type="text" th:field="*{firstName}"
-                   class="peer w-full p-2 rounded-md border-2 border-gray-300 placeholder-transparent focus:ring-0 focus:border-purple-600"
+                   class="peer w-full p-2 rounded-md border-2 border-gray-300 placeholder-transparent"
                    placeholder="First Name">
             <label for="firstName"
                    class="absolute pl-2 left-0 -top-5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:pl-0 peer-focus:-top-5 peer-focus:text-purple-600 peer-focus:text-sm">First Name</label>
           </div>
           <div class="relative">
             <input id="lastName" name="lastName" type="text" th:field="*{lastName}"
-                   class="peer w-full p-2 rounded-md border-2 border-gray-300 placeholder-transparent focus:ring-0 focus:border-purple-600"
+                   class="peer w-full p-2 rounded-md border-2 border-gray-300 placeholder-transparent"
                    placeholder="Last Name">
             <label for="lastName"
                    class="absolute pl-2 left-0 -top-5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:pl-0 peer-focus:-top-5 peer-focus:text-purple-600 peer-focus:text-sm">Last Name</label>
@@ -40,21 +45,21 @@
         </div>
         <div class="relative">
           <input id="username" name="username" type="text" th:field="*{username}"
-                 class="peer w-full p-2 rounded-md border-2 border-gray-300 placeholder-transparent focus:ring-0 focus:border-purple-600"
+                 class="peer w-full p-2 rounded-md border-2 border-gray-300 placeholder-transparent"
                  placeholder="Username">
           <label for="username"
                  class="absolute pl-2 left-0 -top-5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:pl-0 peer-focus:-top-5 peer-focus:text-purple-600 peer-focus:text-sm">Username</label>
         </div>
         <div class="relative">
           <input id="password" name="password" type="password" th:field="*{password}"
-            class="peer w-full p-2 rounded-md border-2 border-gray-300 placeholder-transparent focus:ring-0 focus:border-purple-600"
+            class="peer w-full p-2 rounded-md border-2 border-gray-300 placeholder-transparent"
             placeholder="password">
           <label for="password"
             class="absolute pl-2 left-0 -top-5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:pl-0 peer-focus:-top-5 peer-focus:text-purple-600 peer-focus:text-sm">Password</label>
         </div>
         <div class="relative">
           <input id="email" name="email" type="email" th:field="*{email}"
-                 class="peer w-full p-2 rounded-md border-2 border-gray-300 placeholder-transparent focus:ring-0 focus:border-purple-600"
+                 class="peer w-full p-2 rounded-md border-2 border-gray-300 placeholder-transparent"
                  placeholder="Email">
           <label for="email"
                  class="absolute pl-2 left-0 -top-5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:pl-0 peer-focus:-top-5 peer-focus:text-purple-600 peer-focus:text-sm">Email</label>

@@ -8,7 +8,7 @@
   <title>Login - URLific</title>
   <link rel="shortcut icon" th:href="@{/image/logo.png}" type="image/x-icon">
   <link rel="stylesheet" type="text/css" th:href="@{/css/tailwind.css}" />
-  <script th:src="@{/js/font-awesome.js}"></script>
+  <script th:src="@{/js/font-awesome.min.js}"></script>
 </head>
 
 <body>
@@ -23,7 +23,7 @@
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm p-6 rounded-md shadow-md">
       <div th:if="${param.error}" class="p-3 bg-rose-200 rounded-md text-red-700">
-        <p><i class="fa-sharp fa-solid fa-circle-xmark"></i> Invalid username and password!</p>
+        <p><i class="fa-sharp fa-solid fa-circle-xmark"></i> [[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
       </div>
       <div th:if="${param.logout}" class="p-3 bg-green-200 rounded-md text-green-700">
         <p><i class="fa-sharp fa-solid fa-circle-check"></i> You have been logged out!</p>
@@ -36,7 +36,7 @@
           <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Username</label>
           <div class="mt-2">
             <input id="username" name="username" type="text" autocomplete="username" required
-              class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6">
+              class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6">
           </div>
         </div>
         <div>
@@ -48,7 +48,7 @@
           </div>
           <div class="mt-2">
             <input id="password" name="password" type="password" autocomplete="current-password" required
-              class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6">
+              class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6">
           </div>
         </div>
 
