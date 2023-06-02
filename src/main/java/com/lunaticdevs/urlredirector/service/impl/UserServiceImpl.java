@@ -3,6 +3,7 @@ package com.lunaticdevs.urlredirector.service.impl;
 import com.lunaticdevs.urlredirector.dto.UserDTO;
 import com.lunaticdevs.urlredirector.entity.Role;
 import com.lunaticdevs.urlredirector.entity.User;
+import com.lunaticdevs.urlredirector.exception.UserAlreadyExistsException;
 import com.lunaticdevs.urlredirector.exception.UserNotFoundException;
 import com.lunaticdevs.urlredirector.mapper.UserMapper;
 import com.lunaticdevs.urlredirector.repository.UserRepository;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * author: Saransh Kumar
@@ -30,7 +32,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public User loadUserByUsername(String username) throws UsernameNotFoundException {
-        log.debug("Retrieving user with username: {}", username);
         return findByUsernameHelper(username);
     }
 
@@ -40,8 +41,15 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public void save(UserDTO userDTO) {
+    public void save(UserDTO userDTO) throws UserAlreadyExistsException {
         log.debug("Saving the user with username: {}", userDTO.getUsername());
+
+        Optional<User> userOptional = userRepository.findByUsernameOrEmail(userDTO.getUsername(), userDTO.getEmail());
+        if (userOptional.isPresent()) {
+            log.error("User already exists with the same username or email");
+            throw new UserAlreadyExistsException();
+        }
+
         User user = userMapper.userDtoToUser(userDTO);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setProfileImage(String.format("https://avatars.dicebear.com/api/bottts/%s.svg", user.getUsername()));
@@ -51,7 +59,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     private User findByUsernameHelper(String username) {
+        log.debug("Retrieving user with username: {}", username);
         return userRepository.findByUsername(username)
-                .orElseThrow(UserNotFoundException::new);
+                .orElseThrow(() -> {
+                    log.error("User not found with username: {}", username);
+                    return new UserNotFoundException();
+                });
     }
 }
