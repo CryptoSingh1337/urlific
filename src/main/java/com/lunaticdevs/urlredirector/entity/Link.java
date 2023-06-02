@@ -23,7 +23,7 @@ public class Link {
     private String id;
     private String name;
     private String url;
-    @Indexed(name = "username_idx", unique = true)
+    @Indexed(name = "username_idx")
     private String username;
     @Version
     private Integer version;
