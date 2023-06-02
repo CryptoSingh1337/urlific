@@ -3,7 +3,6 @@ package com.lunaticdevs.urlredirector.controller;
 import com.lunaticdevs.urlredirector.exception.UserNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  * author: Saransh Kumar
@@ -12,8 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class MvcExceptionHandler {
 
     @ExceptionHandler(UserNotFoundException.class)
-    public ModelAndView handleUserNotFoundException(UserNotFoundException e) {
-        ModelAndView modelAndView = new ModelAndView("redirect:/login?error");
-        return modelAndView;
+    public String handleUserNotFoundException(UserNotFoundException e) {
+        return "redirect:/login?error";
     }
 }
