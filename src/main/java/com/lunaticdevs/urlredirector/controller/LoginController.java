@@ -16,6 +16,6 @@ public record LoginController() {
 
     @GetMapping("/access-denied")
     public String accessDeniedPage() {
-        return "error/access-denied";
+        return "error/403";
     }
 }
