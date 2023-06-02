@@ -1,6 +1,7 @@
 package com.lunaticdevs.urlredirector.controller;
 
 import com.lunaticdevs.urlredirector.dto.UserDTO;
+import com.lunaticdevs.urlredirector.exception.UserAlreadyExistsException;
 import com.lunaticdevs.urlredirector.service.UserService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -36,8 +37,13 @@ public record RegisterController(UserService userService) {
             return modelAndView;
         }
         log.debug("Registering user with username: {}", userDTO.getUsername());
-        userService.save(userDTO);
-        modelAndView.setViewName("redirect:/login");
+        try {
+            userService.save(userDTO);
+            modelAndView.setViewName("redirect:/login");
+        } catch (UserAlreadyExistsException e) {
+            modelAndView.addObject("message", e.getMessage());
+            modelAndView.setViewName("register");
+        }
         return modelAndView;
     }
 }
