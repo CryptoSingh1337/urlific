@@ -3,9 +3,12 @@ package com.lunaticdevs.urlredirector.service.impl;
 import com.lunaticdevs.urlredirector.dto.LinkDTO;
 import com.lunaticdevs.urlredirector.entity.Link;
 import com.lunaticdevs.urlredirector.entity.User;
+import com.lunaticdevs.urlredirector.exception.LinkNotFoundException;
 import com.lunaticdevs.urlredirector.mapper.LinkMapper;
 import com.lunaticdevs.urlredirector.repository.LinkRepository;
 import com.lunaticdevs.urlredirector.service.LinkService;
+import com.lunaticdevs.urlredirector.util.Cache;
+import com.lunaticdevs.urlredirector.util.CacheFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,14 +28,34 @@ public class LinkServiceImpl implements LinkService {
 
     private final LinkRepository linkRepository;
     private final LinkMapper linkMapper;
+    private final Cache<String, Link> cache = CacheFactory.getCacheInstance(100);
     @Value("${server.base.address}")
     private String SERVER_BASE_ADDRESS;
 
     @Override
     public List<LinkDTO> getAllByUsername(String username) {
+        log.debug("Retrieving all the link for username: {}", username);
         return linkRepository.findAllByUsername(username).stream()
                 .map(linkMapper::linkToLinkDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Link getByUsernameAndName(String username, String name) {
+        log.debug("Retrieving link with username: {} and name: {}", username, name);
+        String key = String.format("%s%s", username, name);
+        Link link = cache.get(key);
+        if (link != null) {
+            log.debug("Cache Hit - [{}]", key);
+            return link;
+        }
+        link = linkRepository.findByUsernameAndName(username, name)
+                .orElseThrow(() -> {
+                    log.error("Link not found with username: {} and name: {}", username, name);
+                    return new LinkNotFoundException();
+                });
+        cache.put(key, link);
+        return cache.get(key);
     }
 
     @Override
@@ -41,7 +64,7 @@ public class LinkServiceImpl implements LinkService {
         String username = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
         Link link = linkMapper.linkDtoToLink(linkDTO);
         link.setUsername(username);
-        link.setOriginalUrl(String.format("%s/%s/%s", SERVER_BASE_ADDRESS, username, linkDTO.getName()));
+        link.setOriginalUrl(String.format("%s/link/%s/%s", SERVER_BASE_ADDRESS, username, linkDTO.getName()));
         linkRepository.save(link);
     }
 }

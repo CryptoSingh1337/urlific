@@ -31,7 +31,6 @@ public class LRUCache<K, V> implements Cache<K, V> {
             deque.addFirst(node);
             return node.value;
         }
-        printState();
         return null;
     }
 
@@ -44,7 +43,6 @@ public class LRUCache<K, V> implements Cache<K, V> {
         if (map.size() < cacheSize) {
             deque.addFirst(node);
             map.put(key, node);
-            printState();
             return node.value;
         }
 
@@ -52,7 +50,6 @@ public class LRUCache<K, V> implements Cache<K, V> {
         deque.addFirst(node);
         map.remove(removedNode.key);
         map.put(key, node);
-        printState();
         return node.value;
     }
 
@@ -70,10 +67,6 @@ public class LRUCache<K, V> implements Cache<K, V> {
     public void clear() {
         map.clear();
         deque.clear();
-    }
-
-    private void printState() {
-        System.out.println("Current state: " + deque);
     }
 
     private static class Node<K, V> {
