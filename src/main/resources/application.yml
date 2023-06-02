@@ -3,6 +3,8 @@ server:
   error:
     whitelabel:
       enabled: false
+  base:
+    address: ${SERVER_BASE_ADDRESS}
 
 spring:
   application:
@@ -10,3 +12,6 @@ spring:
 logging:
   level:
     com.lunaticdevs: debug
+
+secret:
+  key: ${SECRET_KEY}
