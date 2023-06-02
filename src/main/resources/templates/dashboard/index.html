@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - URLific</title>
+  <link rel="shortcut icon" th:href="@{/image/logo.png}" type="image/x-icon">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/tailwind.css}"/>
+  <script th:src="@{/js/font-awesome.min.js}"></script>
+  <script th:src="@{/js/flowbite.min.js}"></script>
+</head>
+
+<body>
+  <div th:replace="~{fragements/layout.html :: header}"></div>
+  <div th:replace="~{fragements/layout.html :: sidebar}"></div>
+  <div class="p-4 sm:ml-64">
+    <div class="mt-14 lg:p-4">
+      <div class="flex items-center justify-between">
+        <h1 class="font-medium text-lg">Your Links</h1>
+        <button type="button" id="openDialogBtn"
+                class="flex items-center leading-6 rounded-md bg-purple-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-purple-500">
+          <span class="mr-1">
+            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512" style="fill: #ffffff">
+              <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/>
+            </svg>
+          </span>
+          <span>Create</span>
+        </button>
+      </div>
+      <div class="grid grid-cols-1 space-y-6 my-5">
+        <div class="grid grid-cols-2 p-3 rounded-lg shadow-lg border" th:each="l : ${links}">
+          <div class="flex items-center">
+            <span class="font-medium" th:text="${l.name}"></span>
+            <span class="ml-2" th:text="${l.url}"></span>
+          </div>
+          <div class="flex justify-end">
+            <button th:href="@{/dashboard/link/edit?id=l.id}" type="button" class="p-2 mr-1 bg-gray-300 rounded-md" data-tooltip-target="edit-tooltip">
+              <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
+                <path d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z"/>
+              </svg>
+            </button>
+            <div id="edit-tooltip" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip">
+              Edit
+              <div class="tooltip-arrow" data-popper-arrow></div>
+            </div>
+            <button th:href="@{/dashboard/link/delete?id=l.id}" type="button" class="p-2 ml-1 bg-gray-300 rounded-md" data-tooltip-target="delete-tooltip">
+              <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
+                <path d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z"/>
+              </svg>
+            </button>
+            <div id="delete-tooltip" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip">
+              Delete
+              <div class="tooltip-arrow" data-popper-arrow></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <dialog id="dialog" class="m-auto p-5 rounded-lg sm:w-full lg:w-2/6">
+        <h3 class="font-medium text-lg p-2">Create</h3>
+        <hr>
+        <form class="space-y-3" th:action="@{/dashboard/create}" th:object="${link}" method="POST">
+          <div>
+            <label for="name" class="block text-sm font-medium leading-6 text-gray-900">Name</label>
+            <div class="mt-2">
+              <input id="name" name="name" type="text" th:field="*{name}" required
+                     class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6">
+            </div>
+          </div>
+          <div>
+            <label for="url" class="block text-sm font-medium leading-6 text-gray-900">Url</label>
+            <div class="mt-2">
+              <input id="url" name="url" type="text" th:field="*{url}" required
+                     class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                     pattern="(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})">
+            </div>
+          </div>
+          <div class="flex justify-end">
+            <button id="closeDialogBtn" type="button"
+                    class="mr-3 leading-6 rounded-md bg-gray-400 px-3 py-2 text-sm font-semibold text-white hover:bg-gray-500">
+              Close
+            </button>
+            <button type="submit"
+                    class="ml-3 leading-6 rounded-md bg-purple-600 px-3 py-2 text-sm font-semibold text-white hover:bg-purple-500">
+              Create
+            </button>
+          </div>
+        </form>
+      </dialog>
+    </div>
+  </div>
+  <script th:src="@{/js/dashboard.js}"></script>
+</body>
+
+</html>

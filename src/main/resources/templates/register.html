@@ -21,58 +21,61 @@
     </div>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm p-6 rounded-md shadow-md">
-      <div th:if="${#fields.hasErrors()}" class="p-3 bg-rose-200 rounded-md text-red-700">
-        <ul class="list-disc ml-8">
-          <li th:each="err : ${#fields.errors('user.*')}" th:text="${err}"></li>
-        </ul>
-      </div>
-      <form class="space-y-8" th:action="@{/register}" th:object="${user}" method="POST">
-        <div class="grid grid-cols-2 gap-4">
-          <div class="relative">
-            <input id="firstName" name="firstName" type="text" th:field="*{firstName}"
-                   class="peer w-full p-2 rounded-md border-2 border-gray-300 placeholder-transparent"
-                   placeholder="First Name">
-            <label for="firstName"
-                   class="absolute pl-2 left-0 -top-5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:pl-0 peer-focus:-top-5 peer-focus:text-purple-600 peer-focus:text-sm">First Name</label>
+      <form th:action="@{/register}" th:object="${user}" method="POST">
+        <div th:if="${#fields.hasAnyErrors()}" class="mb-8 p-3 bg-rose-200 rounded-md text-red-700">
+          <p>Please correct errors below:</p>
+          <ul class="list-disc ml-8">
+            <li th:each="err : ${#fields.allErrors()}" th:text="${err}"></li>
+          </ul>
+        </div>
+        <div class="space-y-7">
+          <div class="grid grid-cols-2 gap-4">
+            <div class="relative">
+              <input id="firstName" name="firstName" type="text" th:field="*{firstName}" required
+                     class="peer w-full p-2 rounded-md border-2 border-gray-300 placeholder-transparent"
+                     placeholder="First Name">
+              <label for="firstName"
+                     class="absolute pl-2 left-0 -top-5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:pl-0 peer-focus:-top-5 peer-focus:text-purple-600 peer-focus:text-sm">First Name</label>
+            </div>
+            <div class="relative">
+              <input id="lastName" name="lastName" type="text" th:field="*{lastName}" required
+                     class="peer w-full p-2 rounded-md border-2 border-gray-300 placeholder-transparent"
+                     placeholder="Last Name">
+              <label for="lastName"
+                     class="absolute pl-2 left-0 -top-5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:pl-0 peer-focus:-top-5 peer-focus:text-purple-600 peer-focus:text-sm">Last Name</label>
+            </div>
           </div>
           <div class="relative">
-            <input id="lastName" name="lastName" type="text" th:field="*{lastName}"
+            <input id="username" name="username" type="text" th:field="*{username}" required
                    class="peer w-full p-2 rounded-md border-2 border-gray-300 placeholder-transparent"
-                   placeholder="Last Name">
-            <label for="lastName"
-                   class="absolute pl-2 left-0 -top-5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:pl-0 peer-focus:-top-5 peer-focus:text-purple-600 peer-focus:text-sm">Last Name</label>
+                   placeholder="Username">
+            <label for="username"
+                   class="absolute pl-2 left-0 -top-5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:pl-0 peer-focus:-top-5 peer-focus:text-purple-600 peer-focus:text-sm">Username</label>
           </div>
+          <div class="relative">
+            <input id="password" name="password" type="password" th:field="*{password}" required
+                   class="peer w-full p-2 rounded-md border-2 border-gray-300 placeholder-transparent"
+                   placeholder="password">
+            <label for="password"
+                   class="absolute pl-2 left-0 -top-5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:pl-0 peer-focus:-top-5 peer-focus:text-purple-600 peer-focus:text-sm">Password</label>
+          </div>
+          <div class="relative">
+            <input id="email" name="email" type="email" th:field="*{email}" required
+                   class="peer w-full p-2 rounded-md border-2 border-gray-300 placeholder-transparent"
+                   placeholder="Email">
+            <label for="email"
+                   class="absolute pl-2 left-0 -top-5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:pl-0 peer-focus:-top-5 peer-focus:text-purple-600 peer-focus:text-sm">Email</label>
+          </div>
+          <div>
+            <button type="submit"
+                    class="flex w-full justify-center rounded-md bg-purple-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-purple-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600">Sign
+              up</button>
+          </div>
+          <p class="text-end text-sm">
+            <span class="text-gray-400">Already have an account? </span>
+            <a th:href="@{/login}" class="text-indigo-500">Sign in</a>
+          </p>
         </div>
-        <div class="relative">
-          <input id="username" name="username" type="text" th:field="*{username}"
-                 class="peer w-full p-2 rounded-md border-2 border-gray-300 placeholder-transparent"
-                 placeholder="Username">
-          <label for="username"
-                 class="absolute pl-2 left-0 -top-5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:pl-0 peer-focus:-top-5 peer-focus:text-purple-600 peer-focus:text-sm">Username</label>
-        </div>
-        <div class="relative">
-          <input id="password" name="password" type="password" th:field="*{password}"
-            class="peer w-full p-2 rounded-md border-2 border-gray-300 placeholder-transparent"
-            placeholder="password">
-          <label for="password"
-            class="absolute pl-2 left-0 -top-5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:pl-0 peer-focus:-top-5 peer-focus:text-purple-600 peer-focus:text-sm">Password</label>
-        </div>
-        <div class="relative">
-          <input id="email" name="email" type="email" th:field="*{email}"
-                 class="peer w-full p-2 rounded-md border-2 border-gray-300 placeholder-transparent"
-                 placeholder="Email">
-          <label for="email"
-                 class="absolute pl-2 left-0 -top-5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:pl-0 peer-focus:-top-5 peer-focus:text-purple-600 peer-focus:text-sm">Email</label>
-        </div>
-        <div>
-          <button type="submit"
-            class="flex w-full justify-center rounded-md bg-purple-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-purple-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600">Sign
-            up</button>
-        </div>
-        <p class="text-end text-sm">
-          <span class="text-gray-400">Already have an account? </span>
-          <a th:href="@{/login}" class="text-indigo-500">Sign in</a>
-        </p>
       </form>
       <div
         class="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">

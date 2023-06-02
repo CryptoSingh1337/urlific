@@ -1,4 +1,4 @@
-package com.lunaticdevs.urlredirector.security.config;
+package com.lunaticdevs.urlredirector.config.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

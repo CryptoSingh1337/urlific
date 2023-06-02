@@ -28,12 +28,16 @@ public record RegisterController(UserService userService) {
     }
 
     @PostMapping
-    public String registerUser(@Valid @ModelAttribute UserDTO userDTO, BindingResult result) {
-        log.debug("Registering user with username: {}", userDTO.getUsername());
+    public ModelAndView registerUser(@Valid @ModelAttribute("user") UserDTO userDTO, BindingResult result) {
+        ModelAndView modelAndView = new ModelAndView();
         if (result.hasErrors()) {
-            return "register";
+            modelAndView.addObject("user", userDTO);
+            modelAndView.setViewName("register");
+            return modelAndView;
         }
+        log.debug("Registering user with username: {}", userDTO.getUsername());
         userService.save(userDTO);
-        return "redirect:/login";
+        modelAndView.setViewName("redirect:/login");
+        return modelAndView;
     }
 }
