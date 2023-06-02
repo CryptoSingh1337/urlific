@@ -31,8 +31,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public User loadUserByUsername(String username) throws UsernameNotFoundException {
-        return findByUsernameHelper(username);
+    public User loadUserByUsername(String email) throws UsernameNotFoundException {
+        return findByEmailHelper(email);
     }
 
     @Override
@@ -56,6 +56,15 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setIsAccountVerified(false);
         user.setAuthorities(List.of(Role.USER));
         userRepository.save(user);
+    }
+
+    private User findByEmailHelper(String email) {
+        log.debug("Retrieving user with email: {}", email);
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> {
+                    log.error("User not found with email: {}", email);
+                    return new UserNotFoundException();
+                });
     }
 
     private User findByUsernameHelper(String username) {
