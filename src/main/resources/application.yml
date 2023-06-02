@@ -2,13 +2,11 @@ server:
   port: ${PORT:8080}
   error:
     whitelabel:
-      enabled: true
+      enabled: false
 
 spring:
   application:
     name: urlific
-  messages:
-    basename: messages
 logging:
   level:
     com.lunaticdevs: debug
