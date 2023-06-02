@@ -10,5 +10,6 @@ public class LinkDTO {
 
     private String id;
     private String name;
-    private String url;
+    private String originalUrl;
+    private String redirectUrl;
 }

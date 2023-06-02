@@ -21,8 +21,10 @@ public class Link {
 
     @Id
     private String id;
+    @Indexed(name = "name_idx", unique = true)
     private String name;
-    private String url;
+    private String originalUrl;
+    private String redirectUrl;
     @Indexed(name = "username_idx")
     private String username;
     @Version

@@ -15,7 +15,7 @@ public class LinkMapperImpl implements LinkMapper {
     public Link linkDtoToLink(LinkDTO linkDTO) {
         return Link.builder()
                 .name(linkDTO.getName())
-                .url(linkDTO.getUrl())
+                .redirectUrl(linkDTO.getRedirectUrl())
                 .build();
     }
 
@@ -24,7 +24,8 @@ public class LinkMapperImpl implements LinkMapper {
         LinkDTO linkDTO = new LinkDTO();
         linkDTO.setId(link.getId());
         linkDTO.setName(link.getName());
-        linkDTO.setUrl(link.getUrl());
+        linkDTO.setOriginalUrl(link.getOriginalUrl());
+        linkDTO.setRedirectUrl(link.getRedirectUrl());
         return linkDTO;
     }
 }

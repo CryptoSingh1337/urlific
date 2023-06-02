@@ -8,6 +8,7 @@ import com.lunaticdevs.urlredirector.repository.LinkRepository;
 import com.lunaticdevs.urlredirector.service.LinkService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,8 @@ public class LinkServiceImpl implements LinkService {
 
     private final LinkRepository linkRepository;
     private final LinkMapper linkMapper;
+    @Value("${server.base.address}")
+    private String SERVER_BASE_ADDRESS;
 
     @Override
     public List<LinkDTO> getAllByUsername(String username) {
@@ -38,6 +41,7 @@ public class LinkServiceImpl implements LinkService {
         String username = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
         Link link = linkMapper.linkDtoToLink(linkDTO);
         link.setUsername(username);
+        link.setOriginalUrl(String.format("%s/%s/%s", SERVER_BASE_ADDRESS, username, linkDTO.getName()));
         linkRepository.save(link);
     }
 }
