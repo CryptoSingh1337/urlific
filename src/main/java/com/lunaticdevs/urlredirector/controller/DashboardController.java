@@ -9,10 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -33,17 +30,25 @@ public record DashboardController(UserService userService, LinkService linkServi
         return modelAndView;
     }
 
-    @GetMapping("/statistics")
-    @PreAuthorize("hasRole('USER')")
-    public String statisticPage() {
-        return "dashboard/statistics";
-    }
-
     @PostMapping("/create")
     @PreAuthorize("hasRole('USER')")
-    public String createPage(@Valid @ModelAttribute("link") LinkDTO linkDTO) {
+    public String create(@Valid @ModelAttribute("link") LinkDTO linkDTO) {
         log.debug("Link DTO: {}", linkDTO);
         linkService.save(linkDTO);
+        return "redirect:/dashboard";
+    }
+
+    @PostMapping("/update")
+    @PreAuthorize("hasRole('USER')")
+    public String update(@Valid @ModelAttribute("link") LinkDTO linkDTO) {
+        linkService.update(linkDTO);
+        return "redirect:/dashboard";
+    }
+
+    @GetMapping("/delete")
+    @PreAuthorize("hasRole('USER')")
+    public String delete(@RequestParam String id) {
+        linkService.delete(id);
         return "redirect:/dashboard";
     }
 }

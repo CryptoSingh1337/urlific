@@ -67,4 +67,39 @@ public class LinkServiceImpl implements LinkService {
         link.setOriginalUrl(String.format("%s/link/%s/%s", SERVER_BASE_ADDRESS, username, linkDTO.getName()));
         linkRepository.save(link);
     }
+
+    @Override
+    public void update(LinkDTO linkDTO) {
+        log.debug("Updating the link with name: {}", linkDTO.getName());
+        String username = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+        Link link = findByIdHelper(linkDTO.getId());
+        removeFromCache(link.getUsername(), link.getName());
+        if (!link.getName().equals(linkDTO.getName())) {
+            link.setName(linkDTO.getName());
+            link.setOriginalUrl(String.format("%s/link/%s/%s", SERVER_BASE_ADDRESS, username, linkDTO.getName()));
+        }
+        link.setRedirectUrl(linkDTO.getRedirectUrl());
+        linkRepository.save(link);
+    }
+
+    @Override
+    public void delete(String id) {
+        log.debug("Deleting the link with ID: {}", id);
+        Link link = findByIdHelper(id);
+        removeFromCache(link.getUsername(), link.getName());
+//        linkRepository.deleteById(id);
+    }
+
+    private Link findByIdHelper(String id) {
+        log.debug("Retrieving link with ID: {}", id);
+        return linkRepository.findById(id)
+                .orElseThrow(() -> {
+                    log.error("Link not found with ID: {}", id);
+                    return new LinkNotFoundException();
+                });
+    }
+
+    private void removeFromCache(String username, String name) {
+        cache.remove(String.format("%s%s", username, name));
+    }
 }

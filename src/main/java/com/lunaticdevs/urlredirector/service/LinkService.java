@@ -15,4 +15,8 @@ public interface LinkService {
     Link getByUsernameAndName(String username, String name);
 
     void save(LinkDTO linkDTO);
+
+    void update(LinkDTO linkDTO);
+
+    void delete(String id);
 }
