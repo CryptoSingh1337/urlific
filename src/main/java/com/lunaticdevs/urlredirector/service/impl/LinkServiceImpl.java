@@ -87,7 +87,7 @@ public class LinkServiceImpl implements LinkService {
         log.debug("Deleting the link with ID: {}", id);
         Link link = findByIdHelper(id);
         removeFromCache(link.getUsername(), link.getName());
-//        linkRepository.deleteById(id);
+        linkRepository.deleteById(id);
     }
 
     private Link findByIdHelper(String id) {
