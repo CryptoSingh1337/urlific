@@ -3,7 +3,7 @@ package com.lunaticdevs.urlredirector.util;
 import org.springframework.stereotype.Component;
 
 /**
- * author: Saransh Kumar
+ * @author Saransh Kumar
  */
 @Component
 public class CacheFactory {

@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.Map;
 
 /**
- * author: Saransh Kumar
+ * @author Saransh Kumar
  */
 @Slf4j
 public class LRUCache<K, V> implements Cache<K, V> {

@@ -4,8 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
- * author: Saransh Kumar
+ * @author Saransh Kumar
  */
+
 @Controller
 public record LoginController() {
 

@@ -6,8 +6,9 @@ import com.lunaticdevs.urlredirector.mapper.LinkMapper;
 import org.springframework.stereotype.Component;
 
 /**
- * author: Saransh Kumar
+ * @author Saransh Kumar
  */
+
 @Component
 public class LinkMapperImpl implements LinkMapper {
 

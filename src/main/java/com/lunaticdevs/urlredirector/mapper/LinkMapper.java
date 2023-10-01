@@ -4,8 +4,9 @@ import com.lunaticdevs.urlredirector.dto.LinkDTO;
 import com.lunaticdevs.urlredirector.entity.Link;
 
 /**
- * author: Saransh Kumar
+ * @author Saransh Kumar
  */
+
 public interface LinkMapper {
 
     Link linkDtoToLink(LinkDTO linkDTO);

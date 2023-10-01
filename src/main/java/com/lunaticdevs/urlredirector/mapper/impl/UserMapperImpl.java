@@ -6,8 +6,9 @@ import com.lunaticdevs.urlredirector.mapper.UserMapper;
 import org.springframework.stereotype.Component;
 
 /**
- * author: Saransh Kumar
+ * @author Saransh Kumar
  */
+
 @Component
 public class UserMapperImpl implements UserMapper {
 

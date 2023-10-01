@@ -1,8 +1,9 @@
 package com.lunaticdevs.urlredirector.exception;
 
 /**
- * author: Saransh Kumar
+ * @author Saransh Kumar
  */
+
 public class LinkNotFoundException extends RuntimeException {
 
     public LinkNotFoundException() {

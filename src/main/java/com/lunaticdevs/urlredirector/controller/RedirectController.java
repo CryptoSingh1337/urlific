@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.io.IOException;
 
 /**
- * author: Saransh Kumar
+ * @author Saransh Kumar
  */
+
 @Slf4j
 @Controller
 @RequestMapping("/link")

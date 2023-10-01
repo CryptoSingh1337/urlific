@@ -1,8 +1,9 @@
 package com.lunaticdevs.urlredirector.util;
 
 /**
- * author: Saransh Kumar
+ * @author Saransh Kumar
  */
+
 public interface Cache<K, V> {
 
     V get(K key);

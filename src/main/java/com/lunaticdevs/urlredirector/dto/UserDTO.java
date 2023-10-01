@@ -6,8 +6,9 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 /**
- * author: Saransh Kumar
+ * @author Saransh Kumar
  */
+
 @Data
 public class UserDTO {
 

@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * author: Saransh Kumar
+ * @author Saransh Kumar
  */
+
 public interface LinkRepository extends MongoRepository<Link, String> {
 
     List<Link> findAllByUsername(String username);

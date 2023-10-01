@@ -3,8 +3,9 @@ package com.lunaticdevs.urlredirector.dto;
 import lombok.Data;
 
 /**
- * author: Saransh Kumar
+ * @author Saransh Kumar
  */
+
 @Data
 public class LinkDTO {
 

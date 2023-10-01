@@ -14,8 +14,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
- * author: Saransh Kumar
+ * @author Saransh Kumar
  */
+
 @RequiredArgsConstructor
 @Configuration
 public class SecurityConfig {

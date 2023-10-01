@@ -12,8 +12,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 
 /**
- * author: Saransh Kumar
+ * @author Saransh Kumar
  */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

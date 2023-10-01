@@ -5,8 +5,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 /**
- * author: Saransh Kumar
+ * @author Saransh Kumar
  */
+
 @ControllerAdvice
 public class MvcExceptionHandler {
 

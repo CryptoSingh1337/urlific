@@ -5,8 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * author: Saransh Kumar
+ * @author Saransh Kumar
  */
+
 @Controller
 @RequestMapping("/admin/dashboard")
 public record AdminDashboardController() {

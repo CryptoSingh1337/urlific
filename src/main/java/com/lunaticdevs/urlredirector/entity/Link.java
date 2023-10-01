@@ -10,8 +10,9 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
- * author: Saransh Kumar
+ * @author Saransh Kumar
  */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

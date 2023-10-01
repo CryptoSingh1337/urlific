@@ -6,8 +6,9 @@ import com.lunaticdevs.urlredirector.entity.Link;
 import java.util.List;
 
 /**
- * author: Saransh Kumar
+ * @author Saransh Kumar
  */
+
 public interface LinkService {
 
     List<LinkDTO> getAllByUsername(String username);

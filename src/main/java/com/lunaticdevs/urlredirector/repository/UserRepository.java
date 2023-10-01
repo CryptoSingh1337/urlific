@@ -7,8 +7,9 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 /**
- * author: Saransh Kumar
+ * @author Saransh Kumar
  */
+
 @Repository
 public interface UserRepository extends MongoRepository<User, String> {
 
