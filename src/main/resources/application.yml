@@ -9,6 +9,24 @@ server:
 spring:
   application:
     name: urlific
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            redirect-uri: ${GOOGLE_REDIRECT_URI}
+            authorization-uri: ${GOOGLE_AUTHORIZATION_URI}
+            token-uri: ${GOOGLE_TOKEN_URI}
+            user-info-uri: ${GOOGLE_USER_INFO_URI}
+            jwk-set-uri: ${GOOGLE_JWK_SET_URI}
+            scope[0]: openid
+            scope[1]: profile
+            scope[2]: email
+            scope[3]: address
+            scope[4]: phone
+
 logging:
   level:
     com.lunaticdevs: debug

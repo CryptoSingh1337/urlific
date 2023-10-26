@@ -31,7 +31,7 @@
       <div th:if="${param.successful}" class="mb-3 p-3 bg-green-200 rounded-md text-green-700">
         <p><i class="fa-sharp fa-solid fa-circle-check"></i> Your account has been created! Please verify your email.</p>
       </div>
-      <form th:action="@{/authenticateTheUser}" method="POST">
+      <form th:action="@{/authenticate}" method="POST">
         <div class="space-y-6">
           <div>
             <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email</label>
@@ -74,8 +74,8 @@
         </p>
       </div>
       <div class="grid grid-cols-1">
-        <a class="mb-3 flex w-full items-center justify-center rounded-md bg-red-500 px-7 py-1.5 text-center text-sm font-semibold leading-6 text-white transition duration-150 ease-in-out hover:bg-red-600 focus:bg-red-600 focus:outline-none focus:ring-0"
-          href="https://google.com" role="button" data-te-ripple-init data-te-ripple-color="light">
+        <a th:href="@{/oauth2/authorization/google}" class="mb-3 flex w-full items-center justify-center rounded-md bg-red-500 px-7 py-1.5 text-center text-sm font-semibold leading-6 text-white transition duration-150 ease-in-out hover:bg-red-600 focus:bg-red-600 focus:outline-none focus:ring-0"
+           role="button" data-te-ripple-init data-te-ripple-color="light">
           <i class="fa-brands fa-google mr-2"></i>
           Google
         </a>
