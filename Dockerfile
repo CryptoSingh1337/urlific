@@ -32,4 +32,4 @@ RUN mvn clean package -DskipTests
 FROM eclipse-temurin:17-jre-alpine
 COPY --from=builder target/*.jar app.jar
 EXPOSE $PORT
-CMD ["java", "-jar", "-Dspring.profiles.active=prod", "app.jar"]
+CMD ["java", "-jar", "app.jar"]
