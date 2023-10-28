@@ -6,11 +6,11 @@ import com.lunaticdevs.urlific.service.UserService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.ArrayList;
 
 /**
  * @author Saransh Kumar
@@ -25,9 +25,8 @@ public record DashboardController(UserService userService, LinkService linkServi
     @PreAuthorize("hasRole('USER')")
     public ModelAndView dashboardPage() {
         ModelAndView modelAndView = new ModelAndView("dashboard/index");
-//        System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-//        String username = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
-        modelAndView.addObject("links", new ArrayList<>());
+        String username = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+        modelAndView.addObject("links", linkService.getAllByUsername(username));
         modelAndView.addObject("link", new LinkDTO());
         return modelAndView;
     }
