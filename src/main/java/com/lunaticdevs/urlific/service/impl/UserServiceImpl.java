@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
         User user = userMapper.userDtoToUser(userDTO);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setProfileImage(String.format("https://avatars.dicebear.com/api/bottts/%s.svg", user.getUsername()));
+        user.setProfileImage(String.format("https://api.dicebear.com/7.x/initials/svg?seed=%s.svg", user.getUsername()));
         user.setIsAccountVerified(false);
         user.setAuthorities(List.of(Role.USER));
         save(user);
