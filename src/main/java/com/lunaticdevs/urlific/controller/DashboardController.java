@@ -1,13 +1,13 @@
 package com.lunaticdevs.urlific.controller;
 
 import com.lunaticdevs.urlific.dto.LinkDTO;
+import com.lunaticdevs.urlific.entity.User;
 import com.lunaticdevs.urlific.service.LinkService;
 import com.lunaticdevs.urlific.service.UserService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
