@@ -1,4 +1,4 @@
-package com.lunaticdevs.urlific.util;
+package com.lunaticdevs.urlific.utility;
 
 import lombok.extern.slf4j.Slf4j;
 

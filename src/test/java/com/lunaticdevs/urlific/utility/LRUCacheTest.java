@@ -1,4 +1,4 @@
-package com.lunaticdevs.urlific.util;
+package com.lunaticdevs.urlific.utility;
 
 import org.junit.jupiter.api.Test;
 
