@@ -26,10 +26,13 @@
         <p><i class="fa-sharp fa-solid fa-circle-xmark"></i> [[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
       </div>
       <div th:if="${param.logout}" class="mb-3 p-3 bg-green-200 rounded-md text-green-700">
-        <p><i class="fa-sharp fa-solid fa-circle-check"></i> You have been logged out!</p>
+        <p><i class="fa-sharp fa-solid fa-circle-info"></i> You have been logged out!</p>
       </div>
-      <div th:if="${param.successful}" class="mb-3 p-3 bg-green-200 rounded-md text-green-700">
-        <p><i class="fa-sharp fa-solid fa-circle-check"></i> Your account has been created! Please verify your email.</p>
+      <div th:if="${param.verify}" class="mb-3 p-3 bg-green-200 rounded-md text-green-700">
+        <p><i class="fa-sharp fa-solid fa-circle-check"></i> Your account has been created! Please check your email to verify.</p>
+      </div>
+      <div th:if="${param.success}" class="mb-3 p-3 bg-green-200 rounded-md text-green-700">
+        <p><i class="fa-sharp fa-solid fa-circle-info"></i> Your account has been verified! Please login into your account.</p>
       </div>
       <form th:action="@{/authenticate}" method="POST">
         <div class="space-y-6">

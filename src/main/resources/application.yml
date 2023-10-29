@@ -9,6 +9,15 @@ server:
 spring:
   application:
     name: urlific
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    protocol: smtp
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
   security:
     oauth2:
       client:
@@ -33,3 +42,7 @@ logging:
 
 secret:
   key: ${SECRET_KEY}
+
+jwt:
+  secret:
+    verify-email: ${JWT_VERIFY_EMAIL_SECRET}

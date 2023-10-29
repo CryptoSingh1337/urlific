@@ -1,7 +1,6 @@
 package com.lunaticdevs.urlific.controller;
 
 import com.lunaticdevs.urlific.entity.Link;
-import com.lunaticdevs.urlific.exception.LinkNotFoundException;
 import com.lunaticdevs.urlific.service.LinkService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -24,11 +23,7 @@ public record RedirectController(LinkService linkService) {
     @GetMapping("/{username}/{name}")
     public void redirect(@PathVariable String username, @PathVariable String name,
                          HttpServletResponse response) throws IOException {
-        try {
-            Link link = linkService.getByUsernameAndName(username, name);
-            response.sendRedirect(link.getRedirectUrl());
-        } catch (LinkNotFoundException e) {
-            response.sendRedirect("/");
-        }
+        Link link = linkService.getByUsernameAndName(username, name);
+        response.sendRedirect(link.getRedirectUrl());
     }
 }

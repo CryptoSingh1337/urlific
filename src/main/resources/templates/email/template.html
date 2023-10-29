@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" style="line-height: 1.5; -webkit-text-size-adjust: 100%; -moz-tab-size: 4; -o-tab-size: 4; tab-size: 4; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; font-feature-settings: normal; font-variation-settings: normal;">
+<head>
+  <meta charset="UTF-8">
+  <title>Verify your email</title>
+</head>
+<body style="margin: 0; line-height: inherit;">
+  <div style="width: 50%; margin-left: auto; margin-right: auto; padding: 1.25rem;">
+    <div style="margin-bottom: 1rem;">
+      <img style="width: 5rem; height:5rem;  margin-left: auto; margin-right: auto;" src="https://raw.githubusercontent.com/CryptoSingh1337/urlific/master/src/main/resources/static/image/logo.png" alt="logo">
+      <h3 style="font-size: inherit; font-weight: inherit; margin: 0; font-size: 2.25rem; line-height: 2.5rem; font-weight: 700; text-align: center;">Verify your email address</h3>
+    </div>
+    <div style="padding: 2.5rem; background-color: rgb(199 210 254); border-radius: 0.5rem;">
+      <p style="font-size: inherit; font-weight: inherit; margin: 0;">
+        This email address was recently used to log into
+        <span style="font-weight: 700;">URLific</span>.
+        If this was you, please verify your email address by clicking the following link:
+      </p>
+      <a style="margin-top: 0.75rem; margin-bottom: 0.75rem; text-decoration-line: underline; color: rgb(126 34 206);" th:href="${basePath + '/register/verify?token=' + token}" target="_blank">
+        Confirm my account
+      </a>
+      <p>If this was not you, you can safely delete this email.</p>
+    </div>
+    <p style="font-size: inherit; font-weight: inherit; margin: 0;">If you are having any issues with your account, please contact:
+      <a style="text-decoration-line: underline; color: rgb(126 34 206);" href="mailto:lunaticdevs1337@gmail.com">lunaticdevs1337@gmail.com</a>
+    </p>
+  </div>
+</body>
+</html>

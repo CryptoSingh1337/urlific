@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
   <meta charset="UTF-8">
@@ -18,10 +18,10 @@
       </h2>
       <p class="text-2xl font-semibold md:text-3xl">Page not found</p>
       <p class="mt-4 mb-8">But dont worry, you can find plenty of other things on our homepage.</p>
-      <a rel="noopener noreferrer" th:if="${!#authentication.authenticated}" th:href="@{/}"
-         class="px-8 py-3 font-semibold rounded-md bg-purple-500 text-white">Home page</a>
-      <a rel="noopener noreferrer" th:if="${#authentication.authenticated}" th:href="@{/dashboard}"
-         class="px-8 py-3 font-semibold rounded-md bg-purple-500 text-white">Back to dashboard</a>
+      <a rel="noopener noreferrer" sec:authorize="!isAuthenticated()" th:href="@{/}"
+         class="inline-block px-8 py-3 font-semibold rounded-md bg-purple-500 text-white">Home page</a>
+      <a rel="noopener noreferrer" sec:authorize="isAuthenticated()" th:href="@{/dashboard}"
+         class="inline-block px-8 py-3 font-semibold rounded-md bg-purple-500 text-white">Back to dashboard</a>
     </div>
   </div>
 </section>

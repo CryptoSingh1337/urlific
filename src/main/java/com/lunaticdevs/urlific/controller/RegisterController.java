@@ -1,16 +1,12 @@
 package com.lunaticdevs.urlific.controller;
 
 import com.lunaticdevs.urlific.dto.UserDTO;
-import com.lunaticdevs.urlific.exception.UserAlreadyExistsException;
 import com.lunaticdevs.urlific.service.UserService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -29,6 +25,13 @@ public record RegisterController(UserService userService) {
         return modelAndView;
     }
 
+    @GetMapping("/verify")
+    public ModelAndView verifyEmail(@RequestParam String token) {
+        ModelAndView modelAndView = new ModelAndView("redirect:/login?success");
+        userService.verifyEmail(token);
+        return modelAndView;
+    }
+
     @PostMapping
     public ModelAndView registerUser(@Valid @ModelAttribute("user") UserDTO userDTO, BindingResult result) {
         ModelAndView modelAndView = new ModelAndView();
@@ -37,14 +40,9 @@ public record RegisterController(UserService userService) {
             modelAndView.setViewName("register");
             return modelAndView;
         }
-        log.debug("Registering user with username: {}", userDTO.getUsername());
-        try {
-            userService.save(userDTO);
-            modelAndView.setViewName("redirect:/login");
-        } catch (UserAlreadyExistsException e) {
-            modelAndView.addObject("message", e.getMessage());
-            modelAndView.setViewName("register");
-        }
+        log.info("Registering user with username: {}", userDTO.getUsername());
+        userService.save(userDTO);
+        modelAndView.setViewName("redirect:/login?verify");
         return modelAndView;
     }
 }

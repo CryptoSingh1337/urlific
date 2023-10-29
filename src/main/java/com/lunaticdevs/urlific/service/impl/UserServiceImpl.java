@@ -3,17 +3,21 @@ package com.lunaticdevs.urlific.service.impl;
 import com.lunaticdevs.urlific.dto.UserDTO;
 import com.lunaticdevs.urlific.entity.Role;
 import com.lunaticdevs.urlific.entity.User;
+import com.lunaticdevs.urlific.event.SendVerifyEmailEvent;
 import com.lunaticdevs.urlific.exception.UserAlreadyExistsException;
 import com.lunaticdevs.urlific.exception.UserNotFoundException;
+import com.lunaticdevs.urlific.helper.JwtHelper;
 import com.lunaticdevs.urlific.mapper.UserMapper;
 import com.lunaticdevs.urlific.repository.UserRepository;
 import com.lunaticdevs.urlific.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.event.ApplicationEventMulticaster;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +33,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final JwtHelper jwtHelper;
     private final PasswordEncoder passwordEncoder;
+    private final ApplicationEventMulticaster applicationEventMulticaster;
 
     @Override
     public User loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -47,7 +53,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public void save(UserDTO userDTO) throws UserAlreadyExistsException {
+    public void verifyEmail(String token) {
+        String username = jwtHelper.verifyEmailVerificationToken(token);
+        if (StringUtils.hasText(username)) {
+            log.info("Verifying the email of user with username: {}", username);
+            User user = findByUsernameHelper(username);
+            user.setIsAccountVerified(true);
+            userRepository.save(user);
+        }
+    }
+
+    @Override
+    public void save(UserDTO userDTO) {
         log.debug("Saving the user with username: {}", userDTO.getUsername());
 
         Optional<User> userOptional = userRepository.findByUsernameOrEmail(userDTO.getUsername(), userDTO.getEmail());
@@ -62,6 +79,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setIsAccountVerified(false);
         user.setAuthorities(List.of(Role.USER));
         save(user);
+        applicationEventMulticaster.multicastEvent(new SendVerifyEmailEvent(this,
+                userDTO.getEmail(), userDTO.getUsername()));
     }
 
     @Override
